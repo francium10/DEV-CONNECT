@@ -5,6 +5,8 @@
 // });
 
 const { Router } = require("express")
+const { model, SchemaTypes } = require("mongoose")
+const User = require("./src/models/user")
 
 
 // Above is how we run a basic server that listens to request from frontend using express/node
@@ -108,3 +110,82 @@ const { Router } = require("express")
 // .catch(err => console.log('failed to run'));
 
 // in database.js just do module.exports=connectDB;
+
+// Next is Creating a Schema, something that will define the properties e and 
+// the datatype of they should have. mongoose
+// first we create a folder called models. In that folder add a name of the file you want to use in 
+// our case we say User.js
+// in our User.js 
+// const mongoose=require('mongoose');
+
+// const userSchema=new mongoose.Schema({
+//     firstName:{
+//         type:string
+//     },
+//     lastName:{
+//         type:string
+//     },
+//     email:{
+//         type:string
+//     },
+
+//     country:{
+//         type:string
+//     },
+//     organization:{
+//         type:string
+//     },
+//     password:{
+//         type:string
+//     }
+
+// });
+
+// const User=mongoose.model("User", userSchema);
+// module.exports=User
+
+// module.exports=mongoose.model("User", userSchema)
+
+// After creating a user model and user schema, now we want to use an api to add our first user 
+// into the database. we do a post method to send data onto the database.
+
+// app.post("/signup",async (req,res)=>{
+// const user=new User({
+//     firstName:"John",
+//     LastName:"Doe",
+//     emailId:"john@gmail.com",
+//     password:"abc123"
+//   });
+//   await user.save()
+  
+//   });
+  
+// assuming that we want to create the user above and add them into the database. what we do that by creating a 
+// new instance of the User model we created and then save it. 
+// so first you import 'User' model from 'model/user.js'
+// or  say const User=require('./model/user.js')
+// Then add object with key value pairs that you want to store in the database
+// const user=new User({
+//   firstName:"John",
+//   LastName:"Doe",
+//   emailId:"john@gmail.com",
+//   password:"abc123"
+// });
+// finally user.save(); 
+// res.send('user added successfully !');
+//This will save the new instance of the model User and send a response message when user is added. 
+
+// This is how to register users
+// Now we test it by using postman url as our front end we do a http method post localhost://3000/signup route
+
+// a good practice is using try and catch method upon posting info to a database 
+// this is a good practice because it will help us know if a user is having issues. always do error handling 
+// when dealing with a database  
+
+// try{
+//  await user.save(); 
+// res.send('user added successfully !');
+// }
+// catch{
+//   res.status(400).send("error saving the user"+ err.message)
+// }

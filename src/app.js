@@ -1,6 +1,25 @@
-const express = require('express')
+const express = require('express');
 const connectDB=require('./config/database');
+const { model } = require('mongoose');
 const app=express();
+const User=require("./models/user");
+
+app.post("/signup",async (req,res)=>{
+
+const user=new User(
+  {
+  firstName:"John",
+  lastName:"DOe",
+  email:"John@gmail.com",
+  password:"Abc123",
+  organization:"NWSCO",
+  country:"Zambia"
+}
+);
+await user.save()
+res.send('user added successfully !');
+
+});
 
 
 connectDB()
